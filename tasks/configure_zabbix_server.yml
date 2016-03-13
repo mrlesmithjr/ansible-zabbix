@@ -1,4 +1,12 @@
 ---
+- name: configure_zabbix_server | installing zabbix
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - zabbix-server-mysql
+    - zabbix-frontend-php
+
 - name: configure_zabbix_server | configuring zabbix server
   template:
     src: "etc/zabbix/zabbix_server.conf.j2"
@@ -8,3 +16,9 @@
     mode: 0644
   notify:
     - restart zabbix-server
+
+- name: configure_zabbix_server | installing python-modules
+  pip:
+    name: "{{ item }}"
+    state: present
+  with_items: zabbix_python_modules

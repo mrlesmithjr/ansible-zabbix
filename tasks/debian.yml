@@ -20,12 +20,3 @@
   apt:
     update_cache: true
   when: package_added.changed
-
-- name: debian | installing zabbix
-  apt:
-    name: "{{ item }}"
-    state: present
-  with_items:
-    - zabbix-server-mysql
-    - zabbix-frontend-php
-  when: inventory_hostname in groups[zabbix_server_group]
