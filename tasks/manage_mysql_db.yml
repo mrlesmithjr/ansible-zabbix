@@ -15,7 +15,23 @@
     target: "{{ zabbix_mysql_schema_archive }}"
     state: import
   register: db_imported
-  when: not db_imported_check.stat.exists
+  when: >
+        not db_imported_check.stat.exists and
+        zabbix_version|int >= 3
+
+- name: manage_mysql_db | importing db schema
+  mysql_db:
+    name: "{{ zabbix_db_info.name }}"
+    target: "/usr/share/zabbix-server-mysql/{{ item }}"
+    state: import
+  register: db_imported
+  with_items:
+    - schema.sql
+    - images.sql
+    - data.sql
+  when: >
+        not db_imported_check.stat.exists and
+        zabbix_version|int < 3
 
 - name: manage_mysql_db | marking db as imported
   file:

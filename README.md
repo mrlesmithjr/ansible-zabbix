@@ -1,7 +1,8 @@
 Role Name
 =========
 
-Installs and configures Zabbix server/agent monitoring (https://www.zabbix.com)
+Installs and configures Zabbix server/agent monitoring (https://www.zabbix.com)  
+Define version to install by setting zabbix_version: x.x (2.2|2.4|3.0)
 
 Requirements
 ------------
@@ -37,9 +38,17 @@ Role Variables
 ````
 ---
 # defaults file for ansible-zabbix
-zabbix_advanced_parameters:
+zabbix_advanced_parameters:  #define add'l advanced parameters
   - name: StartVMwareCollectors
-    value: 5
+    value: '{{ zabbix_vmware_instances|int * 2 }}'
+  - name: VMwareCacheSize
+    value: 8M
+  - name: VMwareFrequency
+    value: 60
+  - name: VMwarePerfFrequency
+    value: 60
+  - name: VMwareTimeout
+    value: 10
 zabbix_agent_group: all  #define Ansible inventory that zabbix agents are members of
 zabbix_agent_listen_port: 10050
 zabbix_change_mysql_root_password: true  #defines if mysql root password should be changed
@@ -83,13 +92,18 @@ zabbix_package_dir: '/usr/local/src'  #define directory to save packages to
 zabbix_python_modules:
   - zabbix-api
 zabbix_server_group: 'zabbix-servers'  #define Ansible inventory group that zabbix servers are members of
+zabbix_server_listen_ip: 0.0.0.0  #List of comma delimited IP addresses that the trapper should listen on
+zabbix_server_logfile_size: 0  #defines Maximum size of log file in MB (0-1024) 0=disable
+zabbix_server_logfile: /var/log/zabbix/zabbix_server.log
 zabbix_server_port: 10051  #define zabbix server port
+zabbix_server_timeout: 4  #Specifies how long we wait for agent
 zabbix_server: 'node0.{{ pri_domain_name }}'  #define zabbix server for agents
 zabbix_server_info:
   url: 'http://127.0.0.1/zabbix'
   login_user: 'Admin'
   login_password: 'zabbix'
-zabbix_version: 3.0  #define zabbix version to install
+zabbix_version: 3.0  #define zabbix version to install (2.2|2.4|3.0)
+zabbix_vmware_instances: 1  #define number of VMware services to monitor (if used)...vCenter,ESXi hosts and etc.
 ````
 
 Dependencies
