@@ -1,5 +1,8 @@
 ---
 # defaults file for ansible-zabbix
+zabbix_advanced_parameters:
+  - name: StartVMwareCollectors
+    value: 5
 zabbix_agent_group: all  #define Ansible inventory that zabbix agents are members of
 zabbix_agent_listen_port: 10050
 zabbix_change_mysql_root_password: true  #defines if mysql root password should be changed
@@ -12,7 +15,9 @@ zabbix_db_info:  #defines db info
 zabbix_debian_pre_req_packages:  #defines pre-req packages for debian
   - automysqlbackup
   - gzip
+  - python-dev
   - python-mysqldb
+  - python-pip
 zabbix_debian_repo_info:  #defines Debian based package repo info
   package: 'zabbix-release_{{ zabbix_version }}-1+{{ ansible_distribution_release|lower }}_all.deb'
   url: 'http://repo.zabbix.com/zabbix/{{ zabbix_version }}/{{ ansible_distribution|lower }}/pool/main/z/zabbix-release'
@@ -31,10 +36,20 @@ zabbix_frontend_php_settings:  #defines php settings to be added to Apache confi
     value: -1
   - name: date.timezone
     value: America/New_York
+zabbix_host_groups:
+  - test
+zabbix_manage_groups: false  #defines if zabbix groups should be managed
+zabbix_manage_hosts: false  #defines if zabbix hosts should be managed
 zabbix_mysql_root_password: 'zabbix'  #define mysql root password to be set to if change_mysql_root_password: true
 zabbix_mysql_schema_archive: '/usr/share/doc/zabbix-server-mysql/create.sql.gz'  #defines db schema archive
 zabbix_package_dir: '/usr/local/src'  #define directory to save packages to
+zabbix_python_modules:
+  - zabbix-api
 zabbix_server_group: 'zabbix-servers'  #define Ansible inventory group that zabbix servers are members of
 zabbix_server_port: 10051  #define zabbix server port
 zabbix_server: 'node0.{{ pri_domain_name }}'  #define zabbix server for agents
+zabbix_server_info:
+  url: 'http://127.0.0.1/zabbix'
+  login_user: 'Admin'
+  login_password: 'zabbix'
 zabbix_version: 3.0  #define zabbix version to install
