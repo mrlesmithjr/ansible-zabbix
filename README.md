@@ -1,63 +1,58 @@
-Role Name
-=========
+# Role Name
 
-An [Ansible] role to install/configure [Zabbix] Server.
+An [Ansible](https://www.ansible.com) role to install/configure [Zabbix](https://www.zabbix.com) Server.
 
-Requirements
-------------
+## Requirements
 
 Install required Ansible roles:
-```
+
+```bash
 sudo ansible-galaxy install -r requirements.yml -f
 ```
 
-Vagrant
--------
-Spin up a test environment using Vagrant:  
-```
+## Vagrant
+
+Spin up a test environment using Vagrant:
+
+```bash
 sudo ansible-galaxy install -r requirements.yml -f
 vagrant up
 ```
-Once the environment is up connect to http://127.0.0.1:8080/zabbix using
-your browswer of choice.  
-Login using:  
-```
-username: Admin
-password: zabbix
-```
-You are now ready to begin testing and using Zabbix.  
-When you are done with your testing you can tear down by:  
-```
+
+Once the environment is up connect to <http://127.0.0.1:8080/zabbix> using
+your browswer of choice.
+Login using:
+
+    username: Admin
+    password: zabbix
+
+You are now ready to begin testing and using Zabbix.
+When you are done with your testing you can tear down by:
+
+```bash
 ./cleanup.sh
 ```
 
-Role Variables
---------------
+## Role Variables
 
 [Role Defaults](./defaults/main.yml)
 
-Dependencies
-------------
+## Dependencies
 
 None
 
-Example Playbook
-----------------
+## Example Playbook
 
 [Example Playbook](./playbook.yml)
 
-License
--------
+## License
 
-BSD
+MIT
 
-Author Information
-------------------
+## Author Information
 
 Larry Smith Jr.
-- @mrlesmithjr
-- http://everythingshouldbevirtual.com
-- mrlesmithjr [at] gmail.com
 
-[Ansible]: <https://www.ansible.com>
-[Zabbix]: <https://www.zabbix.com>
+-   @mrlesmithjr
+-   <http://everythingshouldbevirtual.com>
+-   mrlesmithjr [at] gmail.com
