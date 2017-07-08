@@ -17,3 +17,5 @@
   when: >
         zabbix_manage_hosts or
         zabbix_manage_groups
+
+- include: services.yml

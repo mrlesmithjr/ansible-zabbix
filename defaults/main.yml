@@ -33,6 +33,8 @@ zabbix_debian_pre_req_packages:
   - python-dev
   - python-mysqldb
   - python-pip
+  - python-pkg-resources
+  - python-setuptools
 
 # Defines Debian based package repo info
 zabbix_debian_repo_info:
