@@ -4,6 +4,7 @@
   service:
     name: "apache2"
     state: "restarted"
+    enabled: true
   become: true
 
 - name: restart zabbix-server

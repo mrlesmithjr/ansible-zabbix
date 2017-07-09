@@ -58,8 +58,8 @@ zabbix_frontend_php_settings:
   - name: date.timezone
     value: America/New_York
 
-zabbix_host_groups:
-  - 'test'
+# Defines which ip info to use in order to add host for monitoring
+zabbix_host_interfaces_ip: 'ansible_ssh_host'
 
 # Defines if zabbix groups should be managed
 zabbix_manage_groups: false

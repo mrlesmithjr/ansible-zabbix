@@ -1,9 +1,35 @@
 ---
+# Flush all pending handlers to ensure everthing is in a functional state
+- meta: flush_handlers
+
+- name: manage_zabbix Ensure Zabbix Server Is Listening
+  wait_for:
+    port: "{{ zabbix_server_port }}"
+
 - name: manage_zabbix | adding ansible groups
   zabbix_group:
     server_url: "{{ zabbix_server_info['url'] }}"
     login_user: "{{ zabbix_server_info['login_user'] }}"
     login_password: "{{ zabbix_server_info['login_password'] }}"
-    host_groups: "{{ zabbix_host_groups }}"
+    host_groups: "{{ hostvars[item]['group_names'] }}"
     state: "present"
   become: true
+  with_items: "{{ groups['all'] }}"
+
+- name: manage_zabbix | adding ansible hosts to groups
+  zabbix_host:
+    server_url: "{{ zabbix_server_info['url'] }}"
+    login_user: "{{ zabbix_server_info['login_user'] }}"
+    login_password: "{{ zabbix_server_info['login_password'] }}"
+    host_groups: "{{ hostvars[item]['group_names'] }}"
+    host_name: "{{ hostvars[item]['inventory_hostname'] }}"
+    interfaces:
+      - type: 1
+        dns: ""
+        ip: "{{ hostvars[item][zabbix_host_interfaces_ip] }}"
+        main: 1
+        port: 10050
+        useip: 1
+    state: "present"
+  become: true
+  with_items: "{{ groups['all'] }}"
