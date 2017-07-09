@@ -1,15 +1,17 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [ansible-zabbix](#ansible-zabbix)
-  - [Requirements](#requirements)
-  - [Vagrant](#vagrant)
-  - [Role Variables](#role-variables)
-  - [Dependencies](#dependencies)
-  - [Example Playbook](#example-playbook)
-  - [License](#license)
-  - [Author Information](#author-information)
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+-   [ansible-zabbix](#ansible-zabbix)
+    -   [Requirements](#requirements)
+    -   [Vagrant](#vagrant)
+    -   [Role Variables](#role-variables)
+    -   [Dependencies](#dependencies)
+    -   [Example Playbook](#example-playbook)
+    -   [License](#license)
+    -   [Author Information](#author-information)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -113,6 +115,9 @@ zabbix_frontend_php_settings:
 
 # Defines which ip info to use in order to add host for monitoring
 zabbix_host_interfaces_ip: 'ansible_ssh_host'
+
+zabbix_host_link_templates:
+  - 'Template App Zabbix Agent'
 
 # Defines if zabbix groups should be managed
 zabbix_manage_groups: false

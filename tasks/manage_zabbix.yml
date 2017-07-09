@@ -30,6 +30,7 @@
         main: 1
         port: 10050
         useip: 1
+    link_templates: "{{ zabbix_host_link_templates|default(omit) }}"
     state: "present"
   become: true
   with_items: "{{ groups['all'] }}"

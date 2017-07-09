@@ -61,6 +61,9 @@ zabbix_frontend_php_settings:
 # Defines which ip info to use in order to add host for monitoring
 zabbix_host_interfaces_ip: 'ansible_ssh_host'
 
+zabbix_host_link_templates:
+  - 'Template App Zabbix Agent'
+
 # Defines if zabbix groups should be managed
 zabbix_manage_groups: false
 
